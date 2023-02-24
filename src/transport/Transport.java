@@ -11,15 +11,19 @@ public abstract class Transport implements Competing {
     public String getBrand() {
         return brand;
     }
+
     public String getModel() {
         return model;
     }
+
     public double getEngineVolume() {
         return engineVolume;
     }
+
     public List<Mechanic> getMechanics() {
         return mechanics;
     }
+
     public Driver getDriver() {
         return driver;
     }
@@ -27,9 +31,11 @@ public abstract class Transport implements Competing {
     public void setEngineVolume(double engineVolume) {
         this.engineVolume = engineVolume;
     }
+
     public void setMechanics(List<Mechanic> mechanics) {
         this.mechanics = mechanics;
     }
+
     public void setDriver(Driver driver) {
         this.driver = driver;
     }
@@ -43,6 +49,7 @@ public abstract class Transport implements Competing {
     }
 
     abstract void startMoving();
+
     abstract void finishTheMovement();
 
     public abstract void bestLapTime();
@@ -51,17 +58,13 @@ public abstract class Transport implements Competing {
 
     abstract void printType();
 
-    abstract boolean passDiagnostics() throws TransportTypeException;
+    abstract void passDiagnostics() throws TransportTypeException;
 
     public boolean checksTheAdditionToTheQueue() {
-        try {
-            passDiagnostics();
-        } catch (TransportTypeException e) {
-            return false;
-        }
+
         return true;
     }
     public String toString() {
-        return "Марка: " + brand + ", Модель: " + model + ", Объём двигателя: " + engineVolume;
+        return "Марка: " + brand + ", Модель: " + model + ", Объём двигателя: " + engineVolume + ", " + driver + ", " + mechanics;
     }
 }

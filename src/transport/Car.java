@@ -62,7 +62,7 @@ public abstract class Car extends Transport {
     }
 
     @Override
-    boolean passDiagnostics() {
-            return true;
-        }
+    void passDiagnostics() {
+        System.out.println("Пройти диагностику!");
     }
+}

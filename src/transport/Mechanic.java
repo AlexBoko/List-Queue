@@ -4,7 +4,6 @@ public class Mechanic {
     private String surname;
     private String company;
     private Car dfas;
-
     public String getName() {
         return name;
     }

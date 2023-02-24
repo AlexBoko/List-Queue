@@ -66,7 +66,11 @@ public abstract class Bus extends Transport {
     }
 
     @Override
-        boolean passDiagnostics () throws TransportTypeException {
+    void passDiagnostics() {
+        try {
             throw new TransportTypeException("Автобусы диагностику проходить не должны!");
+        } catch (TransportTypeException r) {
+            System.out.println("Диагностику проходить не нужно!!!");
         }
     }
+}

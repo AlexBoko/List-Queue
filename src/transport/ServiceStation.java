@@ -22,7 +22,6 @@ public class ServiceStation {
             queue.add(transport);
         }
     }
-
     public void carryOutATechnicalInspectionOfTheCar () {
         if (!queue.isEmpty()) {
             Transport transport = queue.poll();

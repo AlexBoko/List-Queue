@@ -67,7 +67,7 @@ public abstract class Truck extends Transport {
     }
 
     @Override
-        boolean passDiagnostics () {
-            return true;
-        }
+    void passDiagnostics() {
+        System.out.println("Пройти диагностику!");
     }
+}
