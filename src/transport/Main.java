@@ -1,4 +1,5 @@
 package transport;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
@@ -10,14 +11,11 @@ public class Main {
         Mechanic mechanicSanek = new Mechanic("Александр", "Смирнов", "«Очумелые ручки»");
         Mechanic mechanicAndrei = new Mechanic("Сергей", "Невизучий", "«Прямые руки»");
 
-
         DriverB<Car> driverB = new DriverB<>("Петров Петр Петрович", true, 5);
         DriverB<Car> driverB2 = new DriverB<>("Петров2 Петр2 Петрович2", true, 2);
         DriverB<Car> driverB3 = new DriverB<>("Петров3 Петр3 Петрович3", true, 6);
         DriverB<Car> driverB4 = new DriverB<>("Петров4 Петр4 Петрович4", true, 8);
         Car car = new Car("Audi", "R8", 4.0, BodyType.TYPE3, driverB, List.of(mechanicIgor, mechanicOleg)) {
-
-
             @Override
             public void tmeBestCircleTime() {
             }
@@ -27,8 +25,6 @@ public class Main {
             }
         };
         Car car2 = new Car("BMW", "X5", 4.0, BodyType.TYPE1, driverB2, List.of(mechanicIgor)) {
-
-
             @Override
             public void tmeBestCircleTime() {
             }
@@ -38,11 +34,7 @@ public class Main {
 
             }
         };
-
         Car car3 = new Car("Nissan", "Tiana", 3.0, BodyType.TYPE3, driverB3, List.of(mechanicOleg)) {
-
-
-
 
             @Override
             public void tmeBestCircleTime() {
@@ -54,8 +46,6 @@ public class Main {
             }
         };
         Car car4 = new Car("Mercedes", "CLA", 4.0, null, driverB4, List.of(mechanicIgor)) {
-
-
             @Override
             public void tmeBestCircleTime() {
             }
@@ -88,7 +78,6 @@ public class Main {
 
             }
 
-
             @Override
             public void maxSpeed() {
 
@@ -98,22 +87,18 @@ public class Main {
 
             @Override
             public void tmeBestCircleTime() {
-
             }
 
             @Override
             public void maxSpeed() {
-
             }
         };
         Bus bus3 = new Bus("Volvo", "7600", 11.00, Capacity.EL, driverD3, List.of(mechanicSanek)) {
-
 
             @Override
             public void tmeBestCircleTime() {
 
             }
-
             @Override
             public void maxSpeed() {
 
@@ -121,12 +106,10 @@ public class Main {
         };
         Bus bus4 = new Bus("Mercedes", "3300", 9.0, Capacity.ES, driverD4, List.of(mechanicSanek)) {
 
-
             @Override
             public void tmeBestCircleTime() {
 
             }
-
             @Override
             public void maxSpeed() {
 
@@ -134,19 +117,35 @@ public class Main {
         };
         System.out.println(bus);
         bus.printType();
-        bus.passDiagnostics();
+        try {
+            bus.passDiagnostics();
+        } catch (TransportTypeException e) {
+            System.out.println("Автобусы диагностику проходить не должны!");
+        }
 
         System.out.println(bus2);
         bus2.printType();
-        bus2.passDiagnostics();
+        try {
+            bus2.passDiagnostics();
+        } catch (TransportTypeException e) {
+            System.out.println("Автобусы диагностику проходить не должны!");
+        }
 
         System.out.println(bus3);
         bus3.printType();
-        bus3.passDiagnostics();
+        try {
+            bus3.passDiagnostics();
+        } catch (TransportTypeException e) {
+            System.out.println("Автобусы диагностику проходить не должны!");
+        }
 
         System.out.println(bus4);
         bus4.printType();
-        bus4.passDiagnostics();
+        try {
+            bus4.passDiagnostics();
+        } catch (TransportTypeException e) {
+            System.out.println("Автобусы диагностику проходить не должны!");
+        }
 
         System.out.println("==================");
         bus.print();
@@ -157,12 +156,10 @@ public class Main {
         DriverC<Truck> driverC4 = new DriverC<>("Иванов4 Иван4 Иванович4", true, 14);
         Truck trucks = new Truck("Volvo", "8600", 9.3, LoadCapacity.N1, driverC, List.of(mechanicAndrei)) {
 
-
             @Override
             public void tmeBestCircleTime() {
 
             }
-
             @Override
             public void maxSpeed() {
 
@@ -170,12 +167,10 @@ public class Main {
         };
         Truck trucks2 = new Truck("Volvo", "9500", 10.4, LoadCapacity.N2, driverC2, List.of(mechanicAndrei)) {
 
-
             @Override
             public void tmeBestCircleTime() {
 
             }
-
             @Override
             public void maxSpeed() {
 
@@ -187,7 +182,6 @@ public class Main {
             public void tmeBestCircleTime() {
 
             }
-
             @Override
             public void maxSpeed() {
 
@@ -195,12 +189,10 @@ public class Main {
         };
         Truck trucks4 = new Truck("КамАЗ", "4308", 6.7, null, driverC4, List.of(mechanicAndrei)) {
 
-
             @Override
             public void tmeBestCircleTime() {
 
             }
-
             @Override
             public void maxSpeed() {
 
