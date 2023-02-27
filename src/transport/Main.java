@@ -6,37 +6,21 @@ import java.util.*;
 import java.util.HashMap;
 public class Main {
     public static void main(String[] args) {
-        Map<String, List<String>> mechanicsByCar = new HashMap<>();
-
-        // Добавляем автомобили и механиков в HashMap
-        List<String> mechanicsForCar1 = new ArrayList<>();
-        mechanicsForCar1.add("Механик Андрей");
-        mechanicsForCar1.add("Механик Сергей");
-        mechanicsByCar.put("Аudi R8", mechanicsForCar1);
-
-        List<String> mechanicsForCar2 = new ArrayList<>();
-        mechanicsForCar2.add("Механик Александр");
-        mechanicsForCar2.add("Механик Антон");
-        mechanicsByCar.put("BMW X5", mechanicsForCar2);
-
-        List<String> mechanicsForCar3 = new ArrayList<>();
-        mechanicsForCar3.add("Механик Андрей");
-        mechanicsForCar3.add("Механик Александр");
-        mechanicsByCar.put("Nisan Tiana", mechanicsForCar3);
-
-        List<String> mechanicsForCar4 = new ArrayList<>();
-        mechanicsForCar4.add("Механик Антон");
-        mechanicsForCar4.add("Механик Сергей");
-        mechanicsByCar.put("Mersedes CLA", mechanicsForCar4);
-
-        // Выводим все пары ключ-значение через цикл for each
-        for (Map.Entry<String, List<String>> entry : mechanicsByCar.entrySet()) {
-            String car = entry.getKey();
-            List<String> mechanics = entry.getValue();
-            System.out.println(car + " обслуживают механики: " + mechanics);
+        Map<Transport, List<Mechanic>> mechanicsByCar = new HashMap<>();
+        List<Transport> cars = new ArrayList<>();
+        for (Transport car : cars) {
+            mechanicsByCar.put(car, car.getMechanics());
         }
-
-        ArrayList<Mechanic> mechanics = new ArrayList<>();
+        for (Map.Entry<Transport, List<Mechanic>> entry : mechanicsByCar.entrySet()) {
+            Transport car = entry.getKey();
+            List<Mechanic> mechanics = entry.getValue();
+            System.out.println("Автомобиль: " + car);
+            System.out.println("Механики:");
+            for (Mechanic mechanic : mechanics) {
+                System.out.println("- " + mechanic);
+            }
+            System.out.println();
+        }
         Mechanic mechanicAndrei = new Mechanic("Андрей", "Смертин", "«Рога и копыта»");
         Mechanic mechanicAnton = new Mechanic("Антон", "Бессмертных", "«Рога и копыта»");
         Mechanic mechanicAlexandr = new Mechanic("Александр", "Смирнов", "«Очумелые ручки»");
@@ -46,7 +30,7 @@ public class Main {
         DriverB<Car> driverB2 = new DriverB<>("Петров2 Петр2 Петрович2", true, 2);
         DriverB<Car> driverB3 = new DriverB<>("Петров3 Петр3 Петрович3", true, 6);
         DriverB<Car> driverB4 = new DriverB<>("Петров4 Петр4 Петрович4", true, 8);
-        Car car = new Car("Audi", "R8", 4.0, BodyType.TYPE3, driverB, List.of(mechanicAnton , mechanicSergei)) {
+        Car car = new Car("Audi", "R8", 4.0, BodyType.TYPE2, driverB, List.of(mechanicAnton , mechanicSergei)) {
             @Override
             public void tmeBestCircleTime() {
             }
@@ -76,7 +60,7 @@ public class Main {
             public void maxSpeed() {
             }
         };
-        Car car4 = new Car("Mersedes", "CLA", 4.0, null, driverB4, List.of(mechanicAndrei)) {
+        Car car4 = new Car("Mersedes", "CLA", 4.0, BodyType.TYPE6, driverB4, List.of(mechanicAndrei)) {
             @Override
             public void tmeBestCircleTime() {
             }
@@ -86,6 +70,20 @@ public class Main {
 
             }
         };
+
+        List<Mechanic> mechanics1 = List.of(new Mechanic("Cергей", "Невезучий", "Прямые руки"), new Mechanic("Андрей", "Смертин", "Рога и копыта"));
+        List<Mechanic> mechanics2 = List.of(new Mechanic("Александр", "Смирнов", "Очумелые ручки"), new Mechanic("Антон", "Бесмертных", "Рога и копыта"));
+        List<Mechanic> mechanics3 = List.of(new Mechanic("Антон", "Бесмертных", "рога и копыта"), new Mechanic("Александр", "Смирнов", "Очумелые ручки"));
+        List<Mechanic> mechanics4 = List.of(new Mechanic("Андрей", "Смертин", "Рога и копыта"), new Mechanic("Сергей", "Невезучий", "Прямые руки"));
+
+        CarMechanicsMap carMechanicsMap = new CarMechanicsMap();
+        carMechanicsMap.addCarMechanicsPair(car, mechanics1);
+        carMechanicsMap.addCarMechanicsPair(car2, mechanics2);
+        carMechanicsMap.addCarMechanicsPair(car3, mechanics3);
+        carMechanicsMap.addCarMechanicsPair(car4, mechanics4);
+
+        carMechanicsMap.printAllPairs();
+
         System.out.println(car);
         car.printType();
         car.passDiagnostics();
@@ -256,7 +254,6 @@ public class Main {
         System.out.println(driverD3.receiveAndPrintInformation(bus3));
         System.out.println(driverD4.receiveAndPrintInformation(bus4));
         System.out.println("==================");
-        List<Transport> cars = new ArrayList<>();
         cars.add(car);
         cars.add(car2);
         cars.add(car3);
