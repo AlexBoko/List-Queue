@@ -1,21 +1,36 @@
 package transport;
-
+import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
-
+import java.util.HashMap;
 public class Main {
     public static void main(String[] args) {
-        Mechanic mechanicOleg = new Mechanic("Андрей", "Смертин", "«Рога и копыта»");
-        Mechanic mechanicIgor = new Mechanic("Антон", "Бессмертных", "«Рога и копыта»");
-        Mechanic mechanicSanek = new Mechanic("Александр", "Смирнов", "«Очумелые ручки»");
-        Mechanic mechanicAndrei = new Mechanic("Сергей", "Невизучий", "«Прямые руки»");
+        Map<Transport, List<Mechanic>> mechanicsByCar = new HashMap<>();
+        List<Transport> cars = new ArrayList<>();
+        for (Transport car : cars) {
+            mechanicsByCar.put(car, car.getMechanics());
+        }
+        for (Map.Entry<Transport, List<Mechanic>> entry : mechanicsByCar.entrySet()) {
+            Transport car = entry.getKey();
+            List<Mechanic> mechanics = entry.getValue();
+            System.out.println("Автомобиль: " + car);
+            System.out.println("Механики:");
+            for (Mechanic mechanic : mechanics) {
+                System.out.println("- " + mechanic);
+            }
+            System.out.println();
+        }
+        Mechanic mechanicAndrei = new Mechanic("Андрей", "Смертин", "«Рога и копыта»");
+        Mechanic mechanicAnton = new Mechanic("Антон", "Бессмертных", "«Рога и копыта»");
+        Mechanic mechanicAlexandr = new Mechanic("Александр", "Смирнов", "«Очумелые ручки»");
+        Mechanic mechanicSergei = new Mechanic("Сергей", "Невизучий", "«Прямые руки»");
 
         DriverB<Car> driverB = new DriverB<>("Петров Петр Петрович", true, 5);
         DriverB<Car> driverB2 = new DriverB<>("Петров2 Петр2 Петрович2", true, 2);
         DriverB<Car> driverB3 = new DriverB<>("Петров3 Петр3 Петрович3", true, 6);
         DriverB<Car> driverB4 = new DriverB<>("Петров4 Петр4 Петрович4", true, 8);
-        Car car = new Car("Audi", "R8", 4.0, BodyType.TYPE3, driverB, List.of(mechanicIgor, mechanicOleg)) {
+        Car car = new Car("Audi", "R8", 4.0, BodyType.TYPE2, driverB, List.of(mechanicAnton , mechanicSergei)) {
             @Override
             public void tmeBestCircleTime() {
             }
@@ -24,28 +39,7 @@ public class Main {
             public void maxSpeed() {
             }
         };
-        Car car2 = new Car("BMW", "X5", 4.0, BodyType.TYPE1, driverB2, List.of(mechanicIgor)) {
-            @Override
-            public void tmeBestCircleTime() {
-            }
-
-            @Override
-            public void maxSpeed() {
-
-            }
-        };
-        Car car3 = new Car("Nissan", "Tiana", 3.0, BodyType.TYPE3, driverB3, List.of(mechanicOleg)) {
-
-            @Override
-            public void tmeBestCircleTime() {
-
-            }
-
-            @Override
-            public void maxSpeed() {
-            }
-        };
-        Car car4 = new Car("Mercedes", "CLA", 4.0, null, driverB4, List.of(mechanicIgor)) {
+        Car car2 = new Car("BMW", "X5", 4.0, BodyType.TYPE1, driverB2, List.of(mechanicSergei)) {
             @Override
             public void tmeBestCircleTime() {
             }
@@ -55,6 +49,41 @@ public class Main {
 
             }
         };
+        Car car3 = new Car("Nissan", "Tiana", 3.0, BodyType.TYPE3, driverB3, List.of(mechanicAlexandr)) {
+
+            @Override
+            public void tmeBestCircleTime() {
+
+            }
+
+            @Override
+            public void maxSpeed() {
+            }
+        };
+        Car car4 = new Car("Mersedes", "CLA", 4.0, BodyType.TYPE6, driverB4, List.of(mechanicAndrei)) {
+            @Override
+            public void tmeBestCircleTime() {
+            }
+
+            @Override
+            public void maxSpeed() {
+
+            }
+        };
+
+        List<Mechanic> mechanics1 = List.of(new Mechanic("Cергей", "Невезучий", "Прямые руки"), new Mechanic("Андрей", "Смертин", "Рога и копыта"));
+        List<Mechanic> mechanics2 = List.of(new Mechanic("Александр", "Смирнов", "Очумелые ручки"), new Mechanic("Антон", "Бесмертных", "Рога и копыта"));
+        List<Mechanic> mechanics3 = List.of(new Mechanic("Антон", "Бесмертных", "рога и копыта"), new Mechanic("Александр", "Смирнов", "Очумелые ручки"));
+        List<Mechanic> mechanics4 = List.of(new Mechanic("Андрей", "Смертин", "Рога и копыта"), new Mechanic("Сергей", "Невезучий", "Прямые руки"));
+
+        CarMechanicsMap carMechanicsMap = new CarMechanicsMap();
+        carMechanicsMap.addCarMechanicsPair(car, mechanics1);
+        carMechanicsMap.addCarMechanicsPair(car2, mechanics2);
+        carMechanicsMap.addCarMechanicsPair(car3, mechanics3);
+        carMechanicsMap.addCarMechanicsPair(car4, mechanics4);
+
+        carMechanicsMap.printAllPairs();
+
         System.out.println(car);
         car.printType();
         car.passDiagnostics();
@@ -71,7 +100,7 @@ public class Main {
         DriverD<Bus> driverD2 = new DriverD<>("Сергеев2 Сергей2 Сергеевич2", true, 5);
         DriverD<Bus> driverD3 = new DriverD<>("Сергеев3 Сергей3 Сергеевич3", true, 7);
         DriverD<Bus> driverD4 = new DriverD<>("Сергеев4 Сергей4 Сергеевич4", true, 10);
-        Bus bus = new Bus("Volvo", "7700", 10.00, Capacity.L, driverD, List.of(mechanicSanek)) {
+        Bus bus = new Bus("Volvo", "7700", 10.00, Capacity.L, driverD, List.of(mechanicSergei)) {
 
             @Override
             public void tmeBestCircleTime() {
@@ -83,7 +112,7 @@ public class Main {
 
             }
         };
-        Bus bus2 = new Bus("Mercedes", "5600", 7.00, Capacity.S, driverD2, List.of(mechanicSanek)) {
+        Bus bus2 = new Bus("Mercedes", "5600", 7.00, Capacity.S, driverD2, List.of(mechanicSergei)) {
 
             @Override
             public void tmeBestCircleTime() {
@@ -93,7 +122,7 @@ public class Main {
             public void maxSpeed() {
             }
         };
-        Bus bus3 = new Bus("Volvo", "7600", 11.00, Capacity.EL, driverD3, List.of(mechanicSanek)) {
+        Bus bus3 = new Bus("Volvo", "7600", 11.00, Capacity.EL, driverD3, List.of(mechanicSergei)) {
 
             @Override
             public void tmeBestCircleTime() {
@@ -104,7 +133,7 @@ public class Main {
 
             }
         };
-        Bus bus4 = new Bus("Mercedes", "3300", 9.0, Capacity.ES, driverD4, List.of(mechanicSanek)) {
+        Bus bus4 = new Bus("Mercedes", "3300", 9.0, Capacity.ES, driverD4, List.of(mechanicSergei)) {
 
             @Override
             public void tmeBestCircleTime() {
@@ -225,7 +254,6 @@ public class Main {
         System.out.println(driverD3.receiveAndPrintInformation(bus3));
         System.out.println(driverD4.receiveAndPrintInformation(bus4));
         System.out.println("==================");
-        List<Transport> cars = new ArrayList<>();
         cars.add(car);
         cars.add(car2);
         cars.add(car3);
@@ -238,6 +266,7 @@ public class Main {
         cars.add(bus2);
         cars.add(bus3);
         cars.add(bus4);
+
         for (Transport j : cars) {
             System.out.println(j + ", " + j.getDriver() + ", " + j.getMechanics());
         }
