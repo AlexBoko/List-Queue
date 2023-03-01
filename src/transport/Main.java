@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
 import java.util.HashMap;
+import java.util.HashSet;
 public class Main {
     public static void main(String[] args) {
         Map<Transport, List<Mechanic>> mechanicsByCar = new HashMap<>();
@@ -179,10 +180,10 @@ public class Main {
         System.out.println("==================");
         bus.print();
         System.out.println("==================");
-        DriverC<Truck> driverC = new DriverC<>("Иванов Иван Иванович", true, 8);
-        DriverC<Truck> driverC2 = new DriverC<>("Иванов2 Иван2 Иванович2", true, 7);
-        DriverC<Truck> driverC3 = new DriverC<>("Иванов3 Иван3 Иванович3", true, 3);
-        DriverC<Truck> driverC4 = new DriverC<>("Иванов4 Иван4 Иванович4", true, 14);
+        DriverC<Truck> driverC = new DriverC<>("Иванов Иван Иванович", true, 4);
+        DriverC<Truck> driverC2 = new DriverC<>("Иванов2 Иван2 Иванович2", true,8);
+        DriverC<Truck> driverC3 = new DriverC<>("Иванов3 Иван3 Иванович3", true, 11);
+        DriverC<Truck> driverC4 = new DriverC<>("Иванов4 Иван4 Иванович4", true, 7);
         Truck trucks = new Truck("Volvo", "8600", 9.3, LoadCapacity.N1, driverC, List.of(mechanicAndrei)) {
 
             @Override
@@ -267,9 +268,6 @@ public class Main {
         cars.add(bus3);
         cars.add(bus4);
 
-        for (Transport j : cars) {
-            System.out.println(j + ", " + j.getDriver() + ", " + j.getMechanics());
-        }
         System.out.println("==================");
         Queue<Transport> transportSS = new ArrayDeque<>();
         ServiceStation serviceStation = new ServiceStation(transportSS);
@@ -303,6 +301,20 @@ public class Main {
         serviceStation.addACarToTheQueue(car4);
         System.out.println("==================");
         serviceStation.carryOutAVehicleInspection(transportSS);
+        System.out.println("==================");
+
+
+        HashSet<String> drivers = new HashSet<>();
+        drivers.add("Петров Петр Петрович");
+        drivers.add("Иванов Иван Иванович");
+        drivers.add("Сергеев Сергей Сергеевич");
+        drivers.add("Петров Петр Петрович"); // Попытка добавления существующего водителя
+        drivers.add("Иванов Иван Иванович"); // Попытка добавления существующего водителя
+        System.out.println("Все водители:");
+        Iterator<String> iterator = drivers.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
     }
 }
 
